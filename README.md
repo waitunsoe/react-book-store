@@ -14,3 +14,6 @@
 
 - Gradients for Tailwind CSS
   - https://hypercolor.dev/
+
+- Page Transition with react-transition-group
+  - https://reactcommunity.org/react-transition-group/
