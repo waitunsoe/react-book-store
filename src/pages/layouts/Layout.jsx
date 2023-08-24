@@ -4,14 +4,14 @@ import Navbar from "../../components/Navbar";
 
 const Layout = () => {
   return (
-    <div className="">
+    <>
       <Navbar />
 
       {/*  dynamic router's  content*/}
-      <div className="max-w-6xl mx-auto p-3">
+      <div className="max-w-6xl mx-auto p-3 space-y-5">
         <Outlet />
       </div>
-    </div>
+    </>
   );
 };
 

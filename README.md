@@ -11,3 +11,6 @@
 
 - Icons with hero icons
   - https://heroicons.com/
+
+- Gradients for Tailwind CSS
+  - https://hypercolor.dev/
