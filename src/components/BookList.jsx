@@ -1,6 +1,6 @@
 import React from "react";
-import Book from "../assets/everybody-lies.jpg";
 import useFetch from "../hooks/useFetch";
+import BookCard from "./BookCard";
 
 const BookList = () => {
   const {
@@ -56,31 +56,7 @@ const BookList = () => {
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {books?.map((book) => (
-          <div
-            key={book.id}
-            className="max-w-xs w-full mx-auto border border-indigo-200 shadow p-2 space-y-2 group hover:border-indigo-400 rounded-md bg-indigo-100 text-center"
-          >
-            <div className="overflow-hidden duration-300 rounded-sm h-60">
-              <img
-                src={Book}
-                className="object-contain group-hover:scale-105 duration-300 h-full w-full"
-              />
-            </div>
-            <h3 className=" text-lg text-blue-500 font-bold group-hover:text-primary">
-              {book.title}
-            </h3>
-            <p className=" line-clamp-2">{book.description}</p>
-            <div className="flex flex-wrap items-center">
-              {book.categories.map((category, index) => (
-                <span
-                  key={index}
-                  className="rounded-full bg-indigo-500 m-1 px-3 py-1 align-middle text-white"
-                >
-                  {category}
-                </span>
-              ))}
-            </div>
-          </div>
+          <BookCard key={book.id} {...book} />
         ))}
       </div>
     </>
