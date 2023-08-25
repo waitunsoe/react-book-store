@@ -23,7 +23,7 @@ const BookCard = (props) => {
         {categories.map((category, index) => (
           <span
             key={index}
-            className="rounded-full bg-indigo-500 m-1 px-3 py-1 align-middle text-white"
+            className="rounded-full bg-indigo-500 m-1 px-3 py-1 align-middle text-white text-xs"
           >
             {category}
           </span>
