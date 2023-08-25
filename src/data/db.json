@@ -1,0 +1,22 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "Eloquent Javascript",
+      "description": "Best JS Book",
+      "categories": ["Javascript", "Programming"]
+    },
+    {
+      "id": 2,
+      "title": "Laravel From Scratch",
+      "description": "Best PHP Framework Book",
+      "categories": ["PHP", "Laravel", "Programming"]
+    },
+    {
+      "id": 3,
+      "title": "React Basic",
+      "description": "Best JS Library Book",
+      "categories": ["Javascript", "React", "Programming"]
+    }
+  ]
+}
