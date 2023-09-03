@@ -61,7 +61,6 @@ const BookDetail = () => {
           </div>
           <div className=" space-y-3">
             <h3 className=" text-2xl text-blue-500 font-bold">{book.title}</h3>
-            <p className=" line-clamp-2">{book.description}</p>
             <div className="flex flex-wrap items-center">
               {book.categories.map((category, index) => (
                 <span
@@ -72,6 +71,7 @@ const BookDetail = () => {
                 </span>
               ))}
             </div>
+            <p className=" line-clamp-2">{book.description}</p>
           </div>
         </div>
       )}
