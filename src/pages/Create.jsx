@@ -3,7 +3,13 @@ import React, {useState} from "react";
 const Create = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [newCategory, setNewCategory] = useState('');
   const [categories, setCategories] = useState([]);
+
+  const addCategory = () => {
+    setCategories(prevState => [...prevState, newCategory]);
+    setNewCategory('');
+  }
   return (
     <div className="w-full max-w-xl mx-auto">
       <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -15,8 +21,8 @@ const Create = () => {
           </label>
          <div className="flex gap-3 items-center">
            <input
-               value={categories}
-               onChange={e => setCategories([...categories, e.target.value])}
+               value={newCategory}
+               onChange={e => setNewCategory(e.target.value)}
                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-200  focus:border-gray-200"
                type="text"
                placeholder="categories"
@@ -24,6 +30,7 @@ const Create = () => {
            <button
                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                type={"button"}
+               onClick={addCategory}
            >
              <svg
                  xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +48,16 @@ const Create = () => {
              </svg>
            </button>
          </div>
-
+          <div className="flex flex-wrap items-center mt-2">
+            {categories.map((category, index) => (
+                <span
+                    key={index}
+                    className="rounded-full bg-blue-500 m-1 px-3 py-1 align-middle text-white text-xs"
+                >
+            {category}
+          </span>
+            ))}
+          </div>
         </div>
         <div className="mb-4">
           <label
