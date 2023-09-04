@@ -1,18 +1,41 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import useFetch from "../hooks/useFetch.js";
+import {useNavigate} from "react-router-dom";
 
 const Create = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [newCategory, setNewCategory] = useState('');
   const [categories, setCategories] = useState([]);
+  const {setPostData, data:book} = useFetch('http://localhost:3000/books', 'POST');
+  const navigate = useNavigate();
 
   const addCategory = () => {
     setCategories(prevState => [...prevState, newCategory]);
     setNewCategory('');
   }
+
+  const addBook = (e) => {
+    e.preventDefault();
+
+    const newBook = {
+      title,
+      description,
+      categories
+    }
+
+    setPostData(newBook);
+  }
+
+  useEffect(() => {
+    if (book){
+      navigate('/');
+    }
+  }, [book])
+
   return (
     <div className="w-full max-w-xl mx-auto">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <form onSubmit={addBook} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="mb-4">
           <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -66,8 +89,8 @@ const Create = () => {
             Title
           </label>
           <input
-              value={description}
-              onChange={e => setDescription(e.target.value)}
+              value={title}
+              onChange={e => setTitle(e.target.value)}
             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-200  focus:border-gray-200"
             type="text"
             placeholder="Title"

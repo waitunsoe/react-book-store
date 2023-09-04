@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
-const useFetch = (url) => {
+const useFetch = (url, method = "GET") => {
   const [data, setData] = useState(null);
+  const [postData, setPostData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -10,25 +11,49 @@ const useFetch = (url) => {
     const signal = abortController.signal;
 
     setLoading(true);
-    fetch(url, { signal })
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("Something went wrong!");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-        setError(null);
-      })
-      .catch((e) => setError(e.message));
+    const fetchData = () => {
+      fetch(url, options)
+          .then((res) => {
+            if (!res.ok) {
+              throw Error("Something went wrong!");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            setData(data);
+            setLoading(false);
+            setError(null);
+          })
+          .catch((e) => setError(e.message));
+    }
+
+    let options = {
+      signal,
+      method
+    };
+
+    if (method === "GET") {
+      fetchData();
+    }
+
+    if(method === "POST" && postData) {
+      options = {
+        ...options,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postData)
+      }
+      fetchData();
+    }
 
     return () => {
       abortController.abort();
     };
-  }, [url]);
-  return { data, loading, error };
+
+  }, [url, postData]);
+
+  return { data, setPostData, loading, error };
 };
 
 export default useFetch;
