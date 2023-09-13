@@ -1,13 +1,18 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
 import BookCard from "./BookCard";
+import { useLocation } from "react-router-dom";
 
 const BookList = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const search = params.get("search");
+
   const {
     data: books,
     loading,
     error,
-  } = useFetch("http://localhost:3000/books");
+  } = useFetch(`http://localhost:3000/books${search ? `?q=${search}` : ""}`);
 
   if (error) {
     return (

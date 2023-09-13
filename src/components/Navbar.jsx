@@ -1,7 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate(`/?search=${search}`);
+  };
   return (
     <nav className="bg-slate-100 shadow">
       <ul className="flex justify-between gap-3 items-center py-3 px-1 md:p-3 max-w-6xl mx-auto">
@@ -27,7 +33,7 @@ const Navbar = () => {
             </span>
           </Link>
         </li>
-        <li className="flex items-center gap-1 md:gap-3 bg-slate-300 h-10 p-2 md:p-3 rounded-md">
+        <li className="flex items-center gap-1 md:gap-3 bg-slate-300 h-10 p-2 pe-0  rounded-md">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -44,10 +50,27 @@ const Navbar = () => {
           </svg>
 
           <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             type="text"
             placeholder="search books..."
             className=" bg-transparent outline-none block"
           />
+          <button
+            onClick={handleSearch}
+            className="border flex items-center  border-primary bg-primary text-white rounded px-3 py-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-search"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+            </svg>
+          </button>
         </li>
         <li className="flex items-center gap-3 md:gap-5">
           <Link
