@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useTheme from "../hooks/useTheme";
 
+import lightIcon from "../assets/light.svg";
+import darkIcon from "../assets/dark.svg";
+
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -12,12 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      onClick={changeTheme}
-      className={`${
-        theme === "dark" ? "bg-slate-800 text-white" : "bg-slate-100"
-      } shadow border-b`}
-    >
+    <nav className="bg-slate-100 shadow border-b">
       <ul className="flex justify-between gap-3 items-center py-3 px-1 md:p-3 max-w-6xl mx-auto">
         <li>
           <Link to={"/"} className="flex items-center gap-3">
@@ -107,6 +105,14 @@ const Navbar = () => {
               className="w-full h-full rounded-full hover:scale-95"
             />
           </div>
+        </li>
+        <li className=" cursor-pointer text-white">
+          {theme === "dark" && (
+            <img src={lightIcon} onClick={() => changeTheme("light")} />
+          )}
+          {theme === "light" && (
+            <img src={darkIcon} onClick={() => changeTheme("dark")} />
+          )}
         </li>
       </ul>
     </nav>

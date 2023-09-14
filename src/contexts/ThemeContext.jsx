@@ -17,8 +17,8 @@ const ThemeContextProvider = ({ children }) => {
     theme: "light",
   });
 
-  const changeTheme = () => {
-    dispatch({ type: "CHANGE_THEME", payload: "dark" });
+  const changeTheme = (theme) => {
+    dispatch({ type: "CHANGE_THEME", payload: theme });
   };
 
   return (
