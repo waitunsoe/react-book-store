@@ -5,7 +5,7 @@ import useTheme from "../hooks/useTheme";
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const { theme } = useTheme();
+  const { theme, changeTheme } = useTheme();
 
   const handleSearch = () => {
     navigate(`/?search=${search}`);
@@ -13,6 +13,7 @@ const Navbar = () => {
 
   return (
     <nav
+      onClick={changeTheme}
       className={`${
         theme === "dark" ? "bg-slate-800 text-white" : "bg-slate-100"
       } shadow border-b`}
