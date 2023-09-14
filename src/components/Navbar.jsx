@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext);
 
   const handleSearch = () => {
     navigate(`/?search=${search}`);
   };
+
   return (
-    <nav className="bg-slate-100 shadow">
+    <nav
+      className={`${
+        theme === "dark" ? "bg-slate-800 text-white" : "bg-slate-100"
+      } shadow border-b`}
+    >
       <ul className="flex justify-between gap-3 items-center py-3 px-1 md:p-3 max-w-6xl mx-auto">
         <li>
           <Link to={"/"} className="flex items-center gap-3">
