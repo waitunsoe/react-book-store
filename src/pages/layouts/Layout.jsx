@@ -3,12 +3,14 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
 import "./style.css";
+import useTheme from "../../hooks/useTheme";
 
 const Layout = () => {
   const location = useLocation();
-  
+  const { isDark } = useTheme();
+
   return (
-    <>
+    <div className={isDark ? "bg-slate-600" : "bg-white"}>
       <Navbar />
 
       {/*  dynamic router's  content*/}
@@ -19,7 +21,7 @@ const Layout = () => {
           </div>
         </CSSTransition>
       </SwitchTransition>
-    </>
+    </div>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../hooks/useFetch.js";
 import { useNavigate } from "react-router-dom";
+import useTheme from "../hooks/useTheme";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -12,6 +13,8 @@ const Create = () => {
     "POST"
   );
   const navigate = useNavigate();
+
+  const { isDark } = useTheme();
 
   const addCategory = () => {
     if (newCategory && categories.includes(newCategory)) {
@@ -41,13 +44,19 @@ const Create = () => {
   }, [book]);
 
   return (
-    <div className="w-full max-w-xl mx-auto">
+    <div className="w-full h-screen max-w-xl mx-auto">
       <form
         onSubmit={addBook}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className={`${
+          isDark ? " bg-slate-800 text-white" : "bg-white"
+        } shadow-md rounded px-8 pt-6 pb-8 mb-4`}
       >
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label
+            className={`block ${
+              isDark ? "text-white" : "text-gray-700"
+            } text-sm font-bold mb-2`}
+          >
             Categories
           </label>
           <div className="flex gap-3 items-center">
@@ -91,7 +100,11 @@ const Create = () => {
           </div>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label
+            className={`block ${
+              isDark ? "text-white" : "text-gray-700"
+            } text-sm font-bold mb-2`}
+          >
             Title
           </label>
           <input
@@ -103,7 +116,11 @@ const Create = () => {
           />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label
+            className={`block ${
+              isDark ? "text-white" : "text-gray-700"
+            } text-sm font-bold mb-2`}
+          >
             Description
           </label>
           <textarea

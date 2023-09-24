@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import Book from "../assets/everybody-lies.jpg";
+import useTheme from "../hooks/useTheme";
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -11,6 +12,7 @@ const BookDetail = () => {
     error,
   } = useFetch(`http://localhost:3000/books/${id}`);
 
+  const { isDark } = useTheme();
   return (
     <>
       {error && (
@@ -55,12 +57,22 @@ const BookDetail = () => {
         </div>
       )}
       {book && (
-        <div className="space-y-8 md:space-y-0 md:space-x-8 md:flex">
+        <div
+          className={`space-y-8 md:space-y-0 md:space-x-8 md:flex h-screen ${
+            isDark ? "text-white" : ""
+          }`}
+        >
           <div className="w-full sm:w-64 h-80">
             <img src={Book} className="w-full object-fit h-full" />
           </div>
           <div className=" space-y-3">
-            <h3 className=" text-2xl text-blue-500 font-bold">{book.title}</h3>
+            <h3
+              className={`text-2xl font-bold ${
+                isDark ? "text-white" : "text-blue-500"
+              }`}
+            >
+              {book.title}
+            </h3>
             <div className="flex flex-wrap items-center">
               {book.categories.map((category, index) => (
                 <span

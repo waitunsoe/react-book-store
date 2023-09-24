@@ -8,17 +8,24 @@ import darkIcon from "../assets/dark.svg";
 const Navbar = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
-  const { theme, changeTheme } = useTheme();
+  const { changeTheme, isDark } = useTheme();
 
   const handleSearch = () => {
     navigate(`/?search=${search}`);
   };
 
   return (
-    <nav className="bg-slate-100 shadow border-b">
+    <nav
+      className={` sticky top-0 z-10 shadow border-b ${isDark ? "bg-slate-600 border-b-slate-700" : "bg-slate-100"}`}
+    >
       <ul className="flex justify-between gap-3 items-center py-3 px-1 md:p-3 max-w-6xl mx-auto">
         <li>
-          <Link to={"/"} className="flex items-center gap-3">
+          <Link
+            to={"/"}
+            className={`flex items-center gap-3 ${
+              isDark ? "text-white" : "text-primary"
+            }`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -34,7 +41,7 @@ const Navbar = () => {
               />
             </svg>
 
-            <span className="text-2xl font-bold text-primary hidden md:block">
+            <span className="text-2xl font-bold hidden md:block">
               Books Store
             </span>
           </Link>
@@ -81,7 +88,7 @@ const Navbar = () => {
         <li className="flex items-center gap-3 md:gap-5">
           <Link
             to="/create"
-            className="border flex items-center gap-2 border-primary hover:bg-primary hover:text-white rounded px-3 py-2"
+            className="border flex items-center gap-2 border-primary bg-primary text-white rounded px-3 py-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -106,11 +113,15 @@ const Navbar = () => {
             />
           </div>
         </li>
-        <li className=" cursor-pointer text-white">
-          {theme === "dark" && (
+        <li
+          className={`cursor-pointer text-white border rounded p-1 ${
+            isDark ? "bg-slate-600" : "bg-slate-200"
+          }`}
+        >
+          {isDark && (
             <img src={lightIcon} onClick={() => changeTheme("light")} />
           )}
-          {theme === "light" && (
+          {!isDark && (
             <img src={darkIcon} onClick={() => changeTheme("dark")} />
           )}
         </li>

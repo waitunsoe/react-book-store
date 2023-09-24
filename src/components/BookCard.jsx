@@ -1,12 +1,20 @@
 import React from "react";
 import Book from "../assets/everybody-lies.jpg";
 import { Link } from "react-router-dom";
+import useTheme from "../hooks/useTheme";
 
 const BookCard = (props) => {
   const { id, title, description, categories } = props;
+  const { isDark } = useTheme();
 
   return (
-    <div className="max-w-xs w-full mx-auto border border-indigo-200 shadow p-2 space-y-2 group hover:border-indigo-400 rounded-md bg-indigo-100 text-center">
+    <div
+      className={`max-w-xs w-full mx-auto border  shadow p-2 space-y-2 group  rounded-md  text-center ${
+        isDark
+          ? "bg-slate-600 border-slate-600 hover:border-slate-500"
+          : "bg-indigo-100 border-indigo-200 hover:border-indigo-400"
+      }`}
+    >
       <div className="overflow-hidden duration-300 rounded-sm h-60">
         <img
           src={Book}
