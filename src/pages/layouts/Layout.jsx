@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import { CSSTransition, SwitchTransition } from "react-transition-group";
@@ -9,10 +9,18 @@ const Layout = () => {
   const location = useLocation();
   const { isDark } = useTheme();
 
+  useEffect(() => {
+    const body = document.body;
+    if (isDark) {
+      body.classList.add("bg-slate-600");
+    } else {
+      body.classList.remove("bg-slate-600");
+    }
+  }, [isDark]);
+
   return (
     <div className={isDark ? "bg-slate-600" : "bg-white"}>
       <Navbar />
-
       {/*  dynamic router's  content*/}
       <SwitchTransition>
         <CSSTransition timeout={200} classNames="fade" key={location.pathname}>
